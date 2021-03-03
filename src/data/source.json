@@ -1,0 +1,88 @@
+{
+  "tracts": {
+    "1": {
+      "tract_info": {
+        "total_acres": "40.81",
+        "legal_description": "SW 1/2 NE 1/4 52-2-4 Jefferson County, IA",
+        "highest_best_use":"Agriculture",
+        "improvements":"none",
+        "date_property_visited":"2/28/2021",
+        "income_table": {
+          "header":{
+            "income_source": "Income Source",
+            "dollar_amount": "$ Amount"
+          },
+          "rows":{
+            "1":{
+              "income_source": "Farm rent",
+              "dollar_amount": "$5000"
+            },
+            "2":{
+              "income_source": "Garage rent",
+              "dollar_amount": "$2000"
+            },
+            "3":{
+              "income_source": "Machine Shed rent",
+              "dollar_amount": "$1000"
+            },
+            "4":{
+              "income_source": "Office rent",
+              "dollar_amount": "$2000"
+            }
+          },
+          "footer":{
+            "total": "Income Total",
+            "dollar_amount": "$10,000"
+          }
+        },
+        "expense_table": {
+          "header":{
+            "expense": "Expense",
+            "dollar_amount": "$ Amount"
+          },
+          "rows":{
+            "1":{
+              "expense": "Taxes",
+              "dollar_amount": "$200"
+            },
+            "2":{
+              "expense": "Management",
+              "dollar_amount": "$400"
+            },
+            "3":{
+              "expense": "Maintenance",
+              "dollar_amount": "$300"
+            }
+          },
+          "footer":{
+            "total": "Expense Total",
+            "dollar_amount": "$900"
+          }
+        }
+      },
+      "sales": {
+        "1":{
+          "total_acres": "52.91",
+          "legal_description": "SE 1/4 51-2-4 Jefferson County, IA",
+          "buyer_name": "John Doe",
+          "seller_name":"Jackie Robinson",
+          "sale_date":"2/21/2020"
+        },
+        "2":{
+          "total_acres": "85.40",
+          "legal_description": "NW 1/2 38-1-4 Jefferson County, IA",
+          "buyer_name": "Rebecca Featherss",
+          "seller_name":"Tina Belcher",
+          "sale_date":"4/5/2019"
+        },
+        "3":{
+          "total_acres": "124.10",
+          "legal_description": "NE 1/2 10-5-3 Jefferson County, IA",
+          "buyer_name": "Linda Platt",
+          "seller_name":"Jim Mathers",
+          "sale_date":"3/5/2019"
+        }
+      }
+    }
+  }
+}
