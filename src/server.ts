@@ -1,10 +1,9 @@
-/**
- * Required external modules
- */
 import * as dotenv from "dotenv";
 import express from "express";
 import cors from "cors";
 import helmet from "helmet";
+import { reportRouter } from "./routes/report.router";
+import { dataSourceRouter } from "./routes/datasource.router";
 
 dotenv.config();
 
@@ -19,11 +18,13 @@ const PORT: number = parseInt(process.env.PORT as string, 10);
 const app = express();
 
 /**
- *  Middleware cnfiguration
+ *  Middleware configuration
  */
 app.use(helmet());
 app.use(cors());
 app.use(express.json());
+app.use('/api/property/report', reportRouter);
+app.use('/api/property/data-source', dataSourceRouter);
 
 /**
  * Server initialization
