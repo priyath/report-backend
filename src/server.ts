@@ -15,6 +15,8 @@ if (!process.env.PORT) {
 }
 
 const PORT: number = parseInt(process.env.PORT as string, 10);
+console.log(process.env.PORT);
+console.log(process.env.DB_PATH);
 const app = express();
 
 /**

@@ -3,12 +3,9 @@ import * as util from "util";
 
 const reportsData = require('../data/reports.json');
 const fs = require('fs');
-const path = require('path');
-const low = require('lowdb');
-const FileSync = require('lowdb/adapters/FileSync');
 
-const adapter = new FileSync('db.json');
-const db = low(adapter);
+const DB_PATH = process.env.DB_PATH || 'src/data';
+
 
 // save a Report to database
 export const saveToDatabase = (report: Report): Promise<any> => {
@@ -19,7 +16,7 @@ export const saveToDatabase = (report: Report): Promise<any> => {
     // promisify callback based writeFile function
     const writeFilePromise = util.promisify(fs.writeFile);
 
-    return writeFilePromise('src/data/reports.json', JSON.stringify(reportsData))
+    return writeFilePromise(`${DB_PATH}/reports.json`, JSON.stringify(reportsData))
         .then( () => id )
         .catch( (err: object) => { throw err } );
 };
