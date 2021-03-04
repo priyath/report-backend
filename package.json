@@ -1,7 +1,7 @@
 {
-  "name": "agr-backend",
+  "name": "report-backend",
   "version": "1.0.0",
-  "description": "backend to support agr word processor frontend",
+  "description": "backend to support word processor frontend",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
