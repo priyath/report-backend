@@ -9,6 +9,7 @@ export const dataSourceRouter = express.Router();
 
 dataSourceRouter.get("/", async (req: Request, res: Response) => {
     console.log('data source load endpoint called');
+
     try {
         const dataSource: DataSource = await DataService.load();
 

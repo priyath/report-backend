@@ -1,18 +1,1 @@
-[
-  {
-    "id": "1",
-    "name": "My First Report",
-    "createdBy": "Priyath",
-    "createdTimestamp": "1612377643000",
-    "lastUpdatedTimestamp": "1612356043000",
-    "content": "<h2>My First Report </h2>"
-  },
-  {
-    "id": "2",
-    "name": "My Second Report",
-    "createdBy": "Priyath",
-    "createdTimestamp": "1614778843000",
-    "lastUpdatedTimestamp": "1614778843000",
-    "content": "<h2>My First Report </h2>"
-  }
-]
+{"01de698b-53ad-4064-ada8-027438b281b0":{"id":"01de698b-53ad-4064-ada8-027438b281b0","createdTimestamp":"1614832218897","lastUpdatedTimestamp":"1614832425819","username":"xyz","password":"xyz","content":"test content"}}

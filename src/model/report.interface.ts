@@ -1,8 +1,11 @@
-export interface Report {
-    id: string;
-    name: string;
+export interface BaseReport {
+    title: string;
     createdBy: string;
+    content: string;
+}
+
+export interface Report extends BaseReport {
+    id: string;
     createdTimestamp: string;
     lastUpdatedTimestamp: string;
-    content: string;
 }
