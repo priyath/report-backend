@@ -13,7 +13,10 @@ dataSourceRouter.get("/", async (req: Request, res: Response) => {
     try {
         const dataSource: DataSource = await DataService.load();
 
-        res.status(200).send(dataSource);
+        res.status(200).send({
+            success: 'true',
+            payload: dataSource,
+        });
     } catch (e) {
         res.status(500).send(e.message);
     }

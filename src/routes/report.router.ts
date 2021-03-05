@@ -16,7 +16,10 @@ reportRouter.get("/:id", async (req: Request, res: Response) => {
     try {
         const report: Report = await ReportService.load(id);
 
-        res.status(200).send(report || {});
+        res.status(200).send({
+            success: 'true',
+            payload: report,
+        });
     } catch (e) {
         res.status(500).send(e.message);
     }
@@ -30,7 +33,10 @@ reportRouter.post("/", async (req: Request, res: Response) => {
         const baseReport: BaseReport = req.body;
         const id: string = await ReportService.create(baseReport);
 
-        res.status(200).send(id);
+        res.status(200).send({
+            success: 'true',
+            payload: id,
+        });
     } catch (e) {
         res.status(500).send(e.message);
     }
@@ -46,7 +52,10 @@ reportRouter.post("/:id", async (req: Request, res: Response) => {
         const baseReport: BaseReport = req.body;
         const result: string = await ReportService.update(id, baseReport);
 
-        res.status(200).send(result);
+        res.status(200).send({
+            success: 'true',
+            payload: result,
+        });
     } catch (e) {
         res.status(500).send(e.message);
     }

@@ -24,26 +24,26 @@ Initializes the server on port 7000. To enable Hot Module Replacement, open a di
 
 ## API Endpoints
 
-1. GET /api/property/data-source
+1. **GET /api/property/data-source**
 
 Endpoint to retrieve source data in JSON format.
 
 Sample CURL: `curl localhost:7000/api/property/data-source`
 
-2. GET /api/property/report/:id
+2. **GET /api/property/report/:id**
 
 Sample CURL: `curl localhost:7000/api/property/report/01de698b-53ad-4064-ada8-027438b281b0`
 
 Endpoint to retrieve report data. Specify the report id as a URL parameter.
 
-3. POST /api/property/report
+3. **POST /api/property/report**
 
 Endpoint to create a new report. Request payload should contain the report content. Returns the report id
 upon successful persisence
 
 Sample CURL: `curl --header "Content-Type: application/json" --request POST --data '{"content":"<h2>New Report!</h2>","createdBy":"Jon Doe", "title": "My new title"}' http://localhost:7000/api/property/report`
 
-4. POST /api/property/report/:id
+4. **POST /api/property/report/:id**
 
 Endpoint to update an existing report. The request payload will be processed and merged with the existing record.
 New values will overwrite previous data.
