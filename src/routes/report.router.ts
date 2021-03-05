@@ -35,7 +35,9 @@ reportRouter.post("/", async (req: Request, res: Response) => {
 
         res.status(200).send({
             success: 'true',
-            payload: id,
+            payload: {
+                id: id,
+            },
         });
     } catch (e) {
         res.status(500).send(e.message);
@@ -54,7 +56,9 @@ reportRouter.post("/:id", async (req: Request, res: Response) => {
 
         res.status(200).send({
             success: 'true',
-            payload: result,
+            payload: {
+                id: result,
+            },
         });
     } catch (e) {
         res.status(500).send(e.message);
