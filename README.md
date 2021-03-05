@@ -53,7 +53,7 @@ Response:
         "id:"01de698b-53ad-4064-ada8-027438b281b0",
         "createdTimestamp":"1614832218897",
         "lastUpdatedTimestamp":"1614940985814",
-        "content":"test content"
+        "content":"<h2>This is my first report</h2>"
     }
 }
 ```
