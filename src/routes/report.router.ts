@@ -1,6 +1,7 @@
 import express, { Request, Response } from "express";
 import * as ReportService from "../service/report.service";
 import {BaseReport, Report} from "../model/report.interface";
+import {UpdateRequest} from "../model/request.interface";
 
 /**
  * Router definition
@@ -44,15 +45,15 @@ reportRouter.post("/", async (req: Request, res: Response) => {
     }
 });
 
-// POST report to update an existing report
-reportRouter.post("/:id", async (req: Request, res: Response) => {
+// PATCH report to update an existing report
+reportRouter.patch("/:id", async (req: Request, res: Response) => {
     console.log('update existing report endpoint called');
 
     const id: string = req.params.id;
 
     try {
-        const baseReport: BaseReport = req.body;
-        const result: string = await ReportService.update(id, baseReport);
+        const reqObject: UpdateRequest = req.body;
+        const result: string = await ReportService.update(id, reqObject);
 
         res.status(200).send({
             success: 'true',

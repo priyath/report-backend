@@ -1,6 +1,8 @@
 import { BaseReport, Report } from '../model/report.interface';
 import { v4 as uuidv4 } from 'uuid';
 import { saveToDatabase, loadFromDatabase } from "../repository/report.repository";
+import {UpdateRequest} from "../model/request.interface";
+import {updateTracts} from "../common/utils";
 
 /**
  * Report service methods
@@ -22,12 +24,12 @@ export const create = async (baseReport: BaseReport): Promise<string> => {
 };
 
 // update existing report based on received payload
-export const update = async (id: string, baseReport: BaseReport): Promise<string> => {
+export const update = async (id: string, reqObject: UpdateRequest): Promise<string> => {
     const currentTimestamp = Date.now().toString();
 
     return loadFromDatabase(id).then((report: Report) => {
         if (report) {
-            report.content = baseReport.content;
+            updateTracts(report, reqObject);
             report.lastUpdatedTimestamp = currentTimestamp;
 
             return saveToDatabase(report);
