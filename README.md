@@ -23,6 +23,9 @@ In the project directory, you can run:
 
 `npm install` and `npm run start` to initialize server on port 7000.
 
+### Test Coverage
+`npm run test` to run jest based testing for business logic within the application.
+
 ## API Endpoints
 
 To interact with available endpoints, initialize the application and visit `http://localhost:7000/api-docs/` for swagger documentation.
