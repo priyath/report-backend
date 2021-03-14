@@ -7,6 +7,9 @@ import { dataSourceRouter } from "./routes/datasource.router";
 import { errorHandler } from "./middleware/error.middleware";
 import { notFoundHandler } from "./middleware/not-found.middleware";
 
+import swaggerUI from 'swagger-ui-express';
+import swDocument from '../swagger.def';
+
 dotenv.config();
 
 /**
@@ -25,6 +28,8 @@ const app = express();
 app.use(helmet());
 app.use(cors());
 app.use(express.json());
+app.use('/api-docs',swaggerUI.serve,swaggerUI.setup(swDocument));
+
 app.use('/api/property/report', reportRouter);
 app.use('/api/property/data-source', dataSourceRouter);
 

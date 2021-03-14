@@ -32,19 +32,26 @@ export const updateInDatabase = (reportId: string, updatedReport: Report): Promi
 };
 
 // load report from database
-export const loadFromDatabase = (reportId: string): Promise<Report> => {
+export const loadFromDatabase = (reportId: string): Promise<Report | null> => {
 
     const report = db.get('reports')
         .find({id: reportId})
         .value();
 
-    let testReport: Report = {
-        id: report.id,
-        createdTimestamp: report.createdTimestamp,
-        lastUpdatedTimestamp: report.lastUpdatedTimestamp,
-        title: report.title,
-        createdBy: report.createdBy,
-        tracts: report.tracts,
-    };
-    return Promise.resolve(testReport);
+    if (report) {
+        let testReport: Report = {
+            id: report.id,
+            createdTimestamp: report.createdTimestamp,
+            lastUpdatedTimestamp: report.lastUpdatedTimestamp,
+            title: report.title,
+            createdBy: report.createdBy,
+            tracts: report.tracts,
+        };
+        return Promise.resolve(testReport);
+    }
+
+    throw ({
+        status: 404,
+        message: `Report not found for ${reportId}`
+    });
 };

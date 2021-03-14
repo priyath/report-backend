@@ -20,8 +20,15 @@ reportRouter.get("/:id", async (req: Request, res: Response) => {
             success: 'true',
             payload: report,
         });
+
     } catch (e) {
-        res.status(500).send(e.message);
+        const status = e.status || 500;
+        const message = e.message || 'Internal Server Error';
+
+        res.status(status).send({
+            success: 'false',
+            message,
+        });
     }
 });
 

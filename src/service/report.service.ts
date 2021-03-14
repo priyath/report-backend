@@ -26,18 +26,21 @@ export const create = async (createReqObject: ICreateRequest): Promise<string> =
 export const update = async (reportId: string, updateReqObject: IUpdateRequest): Promise<string> => {
     const currentTimestamp = Date.now().toString();
 
-    return loadFromDatabase(reportId).then((report: Report) => {
+    return loadFromDatabase(reportId).then((report: any) => {
         if (report) {
             updateTracts(report.tracts, updateReqObject.tracts);
             report.lastUpdatedTimestamp = currentTimestamp;
 
             return updateInDatabase(reportId, report);
         }
-        return `Report not found for ${reportId}`;
     });
 };
 
 // load a report by id
-export const load = async (id: string): Promise<Report> => {
-    return loadFromDatabase(id);
+export const load = async (reportId: string): Promise<Report> => {
+    return loadFromDatabase(reportId).then((report: any) => {
+       if (report) {
+           return report;
+       }
+    });
 };
