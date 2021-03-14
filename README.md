@@ -5,10 +5,12 @@ to support Hot Module Replacement for local development.
 
 ## Project Structure
 * data - Temporary folder to persist sample data
-* model - Typed interfaces for data representation
+* model - Typed interfaces for data representation and schema for API request validation
 * repository - Layer to retrieve data from persistent data store
 * routes - Controller layer to handle API routes
 * service - Logic layer to bridge controllers and repositories
+* middleware - middleware chain to process request object
+* common - common utility functions 
 
 Note: The project structure may be broken down into a modular structure as the repository grows to keep things more
 organized.
@@ -17,12 +19,13 @@ organized.
 
 In the project directory, you can run:
 
-### `npm install` and `npm start`
+### App Initialization
 
-Initializes the server on port 7000. To enable Hot Module Replacement, open a different terminal and run
-`npm run webpack` and then run `npm start`.
+`npm install` and `npm run start` to initialize server on port 7000.
 
 ## API Endpoints
+
+To interact with available endpoints, initialize the application and visit `http://localhost:7000/api-docs/` for swagger documentation.
 
 1. **GET /api/property/data-source**
 
@@ -91,5 +94,3 @@ Response:
     }
 }
 ```
-
-
