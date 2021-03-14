@@ -3,7 +3,7 @@ import * as ReportService from "../service/report.service";
 import {Report} from "../model/report.interface";
 import {ICreateRequest, IUpdateRequest} from "../model/request.interface";
 import {requestValidator} from "../middleware/validator.middleware";
-import {updateRequestSchema} from "../model/request.schema";
+import {updateRequestSchema, createRequestSchema} from "../model/request.schema";
 
 export const reportRouter = express.Router();
 
@@ -27,7 +27,7 @@ reportRouter.get("/:id", async (req: Request, res: Response, next: NextFunction)
 });
 
 // POST report to save a new report
-reportRouter.post("/", async (req: Request, res: Response, next: NextFunction) => {
+reportRouter.post("/", requestValidator(createRequestSchema), async(req: Request, res: Response, next: NextFunction) => {
     console.log('save new report endpoint called');
 
     try {

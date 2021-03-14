@@ -17,6 +17,9 @@ export const saveToDatabase = (report: Report): Promise<any> => {
         .push(report)
         .write();
 
+    db.update('count', (n: number) => n + 1)
+        .write();
+
     return Promise.resolve(report.id);
 };
 

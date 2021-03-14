@@ -16,7 +16,25 @@
       },
       "createdBy": "Jon Doe",
       "title": "My new title"
+    },
+    {
+      "id": "5f711363-78bb-4c17-b1a8-698dd274ba44",
+      "createdTimestamp": "1615728218449",
+      "lastUpdatedTimestamp": "1615728218449",
+      "tracts": {
+        "tract1": {
+          "id": "tract1id",
+          "pages": [
+            {
+              "pageNumber": "1",
+              "content": "<h2>Hello World</h2>"
+            }
+          ]
+        }
+      },
+      "createdBy": "Jon Doe",
+      "title": "My new title"
     }
   ],
-  "count": 0
+  "count": 2
 }

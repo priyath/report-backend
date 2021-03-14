@@ -6,7 +6,16 @@ const pageSchema = Joi.object({
 });
 
 export const updateRequestSchema = Joi.object({
-    tracts: Joi.array().items(Joi.object({
+    tracts: Joi.object().pattern(Joi.string().required(), Joi.object({
+        id: Joi.string().required(),
+        pages: Joi.array().items(pageSchema).required()
+    }).required())
+});
+
+export const createRequestSchema = Joi.object({
+    title: Joi.string().required(),
+    createdBy: Joi.string().required(),
+    tracts: Joi.object().pattern(Joi.string().required(), Joi.object({
         id: Joi.string().required(),
         pages: Joi.array().items(pageSchema).required()
     }).required())
