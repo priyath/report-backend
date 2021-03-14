@@ -7,7 +7,6 @@ import {updateRequestSchema, createRequestSchema} from "../model/request.schema"
 
 export const reportRouter = express.Router();
 
-// GET report/:id to retrieve a report by id
 reportRouter.get("/:id", async (req: Request, res: Response, next: NextFunction) => {
     console.log('retrieve report endpoint called');
 
@@ -25,6 +24,7 @@ reportRouter.get("/:id", async (req: Request, res: Response, next: NextFunction)
         next(e); // forward to error handling middleware
     }
 });
+
 
 // POST report to save a new report
 reportRouter.post("/", requestValidator(createRequestSchema), async(req: Request, res: Response, next: NextFunction) => {

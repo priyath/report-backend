@@ -34,7 +34,38 @@
       },
       "createdBy": "Jon Doe",
       "title": "My new title"
+    },
+    {
+      "id": "67ea5713-f186-4fde-808f-974fa7fbf789",
+      "createdTimestamp": "1615737875938",
+      "lastUpdatedTimestamp": "1615737940978",
+      "tracts": {
+        "tract1": {
+          "id": "tract1id",
+          "pages": [
+            {
+              "pageNumber": "1",
+              "content": "<h2>This is my first name</h2>"
+            }
+          ]
+        },
+        "tractId1": {
+          "id": "tractId1",
+          "pages": [
+            {
+              "pageNumber": "1",
+              "content": "<h2>Update to report</h2>"
+            },
+            {
+              "pageNumber": "2",
+              "content": "<h2>This is page 2</h2>"
+            }
+          ]
+        }
+      },
+      "createdBy": "Jon Doe",
+      "title": "My new title"
     }
   ],
-  "count": 2
+  "count": 3
 }
