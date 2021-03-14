@@ -63,7 +63,7 @@ Response:
 Endpoint to create a new report. Request payload should contain the report content. Returns the report id
 upon successful persistence
 
-Sample CURL: `curl --header "Content-Type: application/json" --request POST --data '{"content":"<h2>New Report!</h2>","createdBy":"Jon Doe", "title": "My new title"}' http://localhost:7000/api/property/report`
+Sample CURL: `curl --header "Content-Type: application/json" --request POST --data '{ "tracts": {"tract1": {"pages": [{"pageNumber": "1", "content": "<h2>Hello World</h2>"}]}}, "createdBy":"Jon Doe", "title": "My new title"}' http://localhost:7000/api/property/report`
 
 Response: 
 ```
@@ -75,12 +75,12 @@ Response:
 }
 ```
 
-4. **POST /api/property/report/:id**
+4. **PATCH /api/property/report/:id**
 
-Endpoint to update an existing report. The request payload will be processed and merged with the existing record.
+Endpoint to update an existing report. The request payload will be processed and the corresponding tract content will be overwritten.
 New values will overwrite previous data.
 
-Sample CURL: `curl --header "Content-Type: application/json" --request POST --data '{"content": "test content"}' http://localhost:7000/api/property/report/01de698b-53ad-4064-ada8-027438b281b0`
+Sample CURL: `curl --header "Content-Type: application/json" --request PATCH --data '{"tracts":{"tract1":{"pages":[{"pageNumber":"1","content":"<h2>Hello World Test</h2>"}]}}}' http://localhost:7000/api/property/report/01de698b-53ad-4064-ada8-027438b281b0`
 
 Response: 
 ```

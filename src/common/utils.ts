@@ -1,24 +1,20 @@
-import {Page, Report} from "../model/report.interface";
-import {UpdateContent, UpdateRequest} from "../model/request.interface";
+import {Tract} from "../model/report.interface";
 
-export const updateTractPages = (currentPages: Page[], modifiedPages: Page[], newPages: Page[]): Page[] => {
-    // update modified pages in the persisted report
-    const updatedPages = currentPages.map(currPage => {
-        const modPage = modifiedPages.find(modPage => modPage.pageNumber === currPage.pageNumber);
-        return modPage ? modPage : currPage;
-    });
+export const updateTracts = (currTracts: { [key: string]: Tract }, newTracts: { [key: string]: Tract }) => {
 
-    // append new pages at the end and return
-    return [...updatedPages, ...newPages];
-};
+    // update currTracts content with newTracts content
+    for (let tractId in newTracts) {
+        if (newTracts.hasOwnProperty(tractId)) {
+            const tract = newTracts[tractId];
 
-export const updateTracts = (persistedReport: Report, reqObject: UpdateRequest) => {
-    // loop reqObject. For each tract id, update the persistedReport's page content
-
-    reqObject.payload.forEach((pageObject: UpdateContent, tractIdToUpdate: string) => {
-        const currPages = persistedReport.tracts.get(tractIdToUpdate) || [];
-
-        persistedReport.tracts.set(tractIdToUpdate, updateTractPages(currPages,
-            pageObject.modifiedPages, pageObject.newPages));
-    });
+            if (tractId in currTracts) {
+                currTracts[tractId].pages = tract.pages;
+            } else {
+                currTracts[tractId] = {
+                    id: tractId,
+                    pages: tract.pages,
+                }
+            }
+        }
+    }
 };

@@ -1,10 +1,14 @@
-import {Page} from "./report.interface";
+import {Tract} from "./report.interface";
+import 'joi-extract-type';
 
-export interface UpdateContent {
-    newPages: Page[],
-    modifiedPages: Page[],
+export interface ICreateRequest {
+    title: string;
+    createdBy: string;
+    tracts: { [key: string]: Tract };
 }
 
-export interface UpdateRequest {
-    payload: Map<string, UpdateContent>
+export interface IUpdateRequest {
+    tracts: { [key: string]: Tract }
 }
+
+export type IRequests = IUpdateRequest | ICreateRequest;
