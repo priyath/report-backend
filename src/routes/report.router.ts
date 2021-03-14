@@ -2,12 +2,9 @@ import express, {Request, Response} from "express";
 import * as ReportService from "../service/report.service";
 import {Report} from "../model/report.interface";
 import {ICreateRequest, IUpdateRequest} from "../model/request.interface";
-import {middleware} from "../middleware/validator.middleware";
+import {requestValidator} from "../middleware/validator.middleware";
 import {updateRequestSchema} from "../model/request.schema";
 
-/**
- * Router definition
- */
 export const reportRouter = express.Router();
 
 // GET report/:id to retrieve a report by id
@@ -48,7 +45,7 @@ reportRouter.post("/", async (req: Request, res: Response) => {
 });
 
 // PATCH report to update an existing report
-reportRouter.patch("/:id", middleware(updateRequestSchema), async (req: Request, res: Response) => {
+reportRouter.patch("/:id", requestValidator(updateRequestSchema), async (req: Request, res: Response) => {
     console.log('update existing report endpoint called');
 
     const id: string = req.params.id;

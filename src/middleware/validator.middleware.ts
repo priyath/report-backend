@@ -1,7 +1,7 @@
 import * as Joi from '@hapi/joi';
 import { Request, Response, NextFunction } from "express";
 
-export const middleware = (schema: object) => {
+export const requestValidator = (schema: object) => {
 
     return (request: Request, response: Response, next: NextFunction) => {
         const { error } = Joi.validate(request.body, schema);

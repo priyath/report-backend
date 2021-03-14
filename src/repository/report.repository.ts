@@ -10,7 +10,7 @@ const db = low(adapter);
 db.defaults({ reports: [], count: 0 })
     .write();
 
-// save a Report to database
+// save a report to database
 export const saveToDatabase = (report: Report): Promise<any> => {
 
     db.get('reports')
@@ -20,6 +20,7 @@ export const saveToDatabase = (report: Report): Promise<any> => {
     return Promise.resolve(report.id);
 };
 
+// update a report in the database
 export const updateInDatabase = (reportId: string, updatedReport: Report): Promise<any> => {
 
     db.get('reports')
@@ -30,6 +31,7 @@ export const updateInDatabase = (reportId: string, updatedReport: Report): Promi
     return Promise.resolve(reportId);
 };
 
+// load report from database
 export const loadFromDatabase = (reportId: string): Promise<Report> => {
 
     const report = db.get('reports')
