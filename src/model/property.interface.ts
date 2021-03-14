@@ -13,5 +13,5 @@ export interface Sale extends Property {
 
 export interface Tract extends Property {
     tractInfo: object,
-    sales: Map<number, Sale>
+    sales: { [key: string]: Sale }
 }

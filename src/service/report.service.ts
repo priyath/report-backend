@@ -1,13 +1,14 @@
-import { BaseReport, Report } from '../model/report.interface';
-import { v4 as uuidv4 } from 'uuid';
-import { saveToDatabase, loadFromDatabase } from "../repository/report.repository";
+import {Report} from '../model/report.interface';
+import {v4 as uuidv4} from 'uuid';
+import {saveToDatabase, loadFromDatabase, updateInDatabase} from "../repository/report.repository";
+import {ICreateRequest, IUpdateRequest} from "../model/request.interface";
+import {updateTracts} from "../common/utils";
 
 /**
  * Report service methods
  */
-
 // create a new report based on received payload
-export const create = async (baseReport: BaseReport): Promise<string> => {
+export const create = async (createReqObject: ICreateRequest): Promise<string> => {
     const id = uuidv4();
     const currentTimestamp = Date.now().toString();
 
@@ -15,28 +16,31 @@ export const create = async (baseReport: BaseReport): Promise<string> => {
         id,
         createdTimestamp: currentTimestamp,
         lastUpdatedTimestamp: currentTimestamp,
-        ...baseReport,
+        ...createReqObject,
     };
 
     return saveToDatabase(report);
 };
 
 // update existing report based on received payload
-export const update = async (id: string, baseReport: BaseReport): Promise<string> => {
+export const update = async (reportId: string, updateReqObject: IUpdateRequest): Promise<string> => {
     const currentTimestamp = Date.now().toString();
 
-    return loadFromDatabase(id).then((report: Report) => {
+    return loadFromDatabase(reportId).then((report: any) => {
         if (report) {
-            report.content = baseReport.content;
+            updateTracts(report.tracts, updateReqObject.tracts);
             report.lastUpdatedTimestamp = currentTimestamp;
 
-            return saveToDatabase(report);
+            return updateInDatabase(reportId, report);
         }
-        return `Report not found for ${id}`;
     });
 };
 
 // load a report by id
-export const load = async (id: string): Promise<Report> => {
-    return loadFromDatabase(id);
+export const load = async (reportId: string): Promise<Report> => {
+    return loadFromDatabase(reportId).then((report: any) => {
+       if (report) {
+           return report;
+       }
+    });
 };

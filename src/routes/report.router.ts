@@ -1,14 +1,13 @@
-import express, { Request, Response } from "express";
+import express, {NextFunction, Request, Response} from "express";
 import * as ReportService from "../service/report.service";
-import {BaseReport, Report} from "../model/report.interface";
+import {Report} from "../model/report.interface";
+import {ICreateRequest, IUpdateRequest} from "../model/request.interface";
+import {requestValidator} from "../middleware/validator.middleware";
+import {updateRequestSchema, createRequestSchema} from "../model/request.schema";
 
-/**
- * Router definition
- */
 export const reportRouter = express.Router();
 
-// GET report/:id to retrieve a report by id
-reportRouter.get("/:id", async (req: Request, res: Response) => {
+reportRouter.get("/:id", async (req: Request, res: Response, next: NextFunction) => {
     console.log('retrieve report endpoint called');
 
     const id: string = req.params.id;
@@ -20,18 +19,20 @@ reportRouter.get("/:id", async (req: Request, res: Response) => {
             success: 'true',
             payload: report,
         });
+
     } catch (e) {
-        res.status(500).send(e.message);
+        next(e); // forward to error handling middleware
     }
 });
 
+
 // POST report to save a new report
-reportRouter.post("/", async (req: Request, res: Response) => {
+reportRouter.post("/", requestValidator(createRequestSchema), async(req: Request, res: Response, next: NextFunction) => {
     console.log('save new report endpoint called');
 
     try {
-        const baseReport: BaseReport = req.body;
-        const id: string = await ReportService.create(baseReport);
+        const createObject: ICreateRequest = req.body;
+        const id: string = await ReportService.create(createObject);
 
         res.status(200).send({
             success: 'true',
@@ -40,19 +41,19 @@ reportRouter.post("/", async (req: Request, res: Response) => {
             },
         });
     } catch (e) {
-        res.status(500).send(e.message);
+        next(e); // forward to error handling middleware
     }
 });
 
-// POST report to update an existing report
-reportRouter.post("/:id", async (req: Request, res: Response) => {
+// PATCH report to update an existing report
+reportRouter.patch("/:id", requestValidator(updateRequestSchema), async (req: Request, res: Response, next: NextFunction) => {
     console.log('update existing report endpoint called');
 
     const id: string = req.params.id;
 
     try {
-        const baseReport: BaseReport = req.body;
-        const result: string = await ReportService.update(id, baseReport);
+        const reqObject: IUpdateRequest = {tracts: req.body.tracts};
+        const result: string = await ReportService.update(id, reqObject);
 
         res.status(200).send({
             success: 'true',
@@ -61,6 +62,6 @@ reportRouter.post("/:id", async (req: Request, res: Response) => {
             },
         });
     } catch (e) {
-        res.status(500).send(e.message);
+        next(e); // forward to error handling middleware
     }
 });

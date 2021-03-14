@@ -5,10 +5,12 @@ to support Hot Module Replacement for local development.
 
 ## Project Structure
 * data - Temporary folder to persist sample data
-* model - Typed interfaces for data representation
+* model - Typed interfaces for data representation and schema for API request validation
 * repository - Layer to retrieve data from persistent data store
 * routes - Controller layer to handle API routes
 * service - Logic layer to bridge controllers and repositories
+* middleware - middleware chain to process request object
+* common - common utility functions 
 
 Note: The project structure may be broken down into a modular structure as the repository grows to keep things more
 organized.
@@ -17,12 +19,13 @@ organized.
 
 In the project directory, you can run:
 
-### `npm install` and `npm start`
+### App Initialization
 
-Initializes the server on port 7000. To enable Hot Module Replacement, open a different terminal and run
-`npm run webpack` and then run `npm start`.
+`npm install` and `npm run start` to initialize server on port 7000.
 
 ## API Endpoints
+
+To interact with available endpoints, initialize the application and visit `http://localhost:7000/api-docs/` for swagger documentation.
 
 1. **GET /api/property/data-source**
 
@@ -63,7 +66,7 @@ Response:
 Endpoint to create a new report. Request payload should contain the report content. Returns the report id
 upon successful persistence
 
-Sample CURL: `curl --header "Content-Type: application/json" --request POST --data '{"content":"<h2>New Report!</h2>","createdBy":"Jon Doe", "title": "My new title"}' http://localhost:7000/api/property/report`
+Sample CURL: `curl --header "Content-Type: application/json" --request POST --data '{ "tracts": {"tract1": {"id": "tract1id", "pages": [{"pageNumber": "1", "content": "<h2>Hello World</h2>"}]}}, "createdBy":"Jon Doe", "title": "My new title"}' http://localhost:7000/api/property/report`
 
 Response: 
 ```
@@ -75,12 +78,12 @@ Response:
 }
 ```
 
-4. **POST /api/property/report/:id**
+4. **PATCH /api/property/report/:id**
 
-Endpoint to update an existing report. The request payload will be processed and merged with the existing record.
+Endpoint to update an existing report. The request payload will be processed and the corresponding tract content will be overwritten.
 New values will overwrite previous data.
 
-Sample CURL: `curl --header "Content-Type: application/json" --request POST --data '{"content": "test content"}' http://localhost:7000/api/property/report/01de698b-53ad-4064-ada8-027438b281b0`
+Sample CURL: `curl --header "Content-Type: application/json" --request PATCH --data '{"tracts":{"tract1":{"id": "tractId1", "pages":[{"pageNumber":"1","content":"<h2>Hello World Test</h2>"}]}}}' http://localhost:7000/api/property/report/01de698b-53ad-4064-ada8-027438b281b0`
 
 Response: 
 ```
@@ -91,5 +94,3 @@ Response:
     }
 }
 ```
-
-
